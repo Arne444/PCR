@@ -6,7 +6,7 @@ source_tubes = containers.load('tube-rack-2ml', 'D2', 'tube rack')
 dna_tubes = containers.load('tube-rack-2ml', 'C3', 'dna rack')
 output = containers.load('96-PCR-flat', 'C1', 'output')
 
-p20rack = containers.load('tiprack-10ul', 'B2', 'p20-rack')
+p20rack = containers.load('tiprack-10ul-H', 'B2', 'p20-rack')
 p200rack = containers.load('tiprack-200ul', 'A1', 'p200-rack')
 trash = containers.load('trash-box', 'A3')
 
@@ -26,10 +26,8 @@ p200 = instruments.Pipette(
     axis="b"
 )
 
-p20.start_at_tip(p20rack['C3'])
-
 total_volume = 25
-DNA_volumes = [2, 3, 4, 5, 6]
+DNA_volumes = [1, 2, 3, 4, 5, 6, 8, 10, 15, 20]
 num_pcr_samples = len(DNA_volumes)
 DNA_sources = dna_tubes.wells('A1', 'A2', 'A3', 'A4', 'A5')
 
@@ -37,11 +35,11 @@ mix_location = source_tubes.wells('B1')
 water_source = source_tubes.wells('C1')
 
 sources = [       #uL per PCR well
-    ('A1', 15),    #enzyme -- 4
-    ('A2', 12.5),  #buffer -- 5
-    ('A3', 12.5),  #dNTP -- 2
-    ('A4', 10),    #fprimer -- 3
-    ('A5', 10)     #rprimer -- 1
+    ('A1', 3),    #enzyme -- 4
+    ('A2', 2.5),  #buffer -- 5
+    ('A3', 2.5),  #dNTP -- 2
+    ('A4', 2),    #fprimer -- 3
+    ('A5', 2)     #rprimer -- 1
 ]
 
 sources_total_vol = sum([vol for _, vol in sources])
