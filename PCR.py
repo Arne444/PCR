@@ -52,7 +52,9 @@ for name, vol in sources:
         mix_location,
         blow_out=True)
 
-p200.mix(5, 100, mix_locations)
+p200.pick_up_tip()
+p200.mix(5, 100, mix_location)
+p200.drop_tip()
 
 #Distribute Master Mix
 p20.distribute(
