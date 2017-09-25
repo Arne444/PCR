@@ -27,7 +27,7 @@ p200 = instruments.Pipette(
 )
 
 total_volume = 25
-DNA_volumes = [1, 2, 3, 4, 5, 6, 8, 10, 15, 20]
+DNA_volumes = [1, 2, 3, 4, 5, 6, 7, 8, 10, 15]
 num_pcr_samples = len(DNA_volumes)
 DNA_sources = dna_tubes.wells('A1', 'B1', 'C1', 'D1', 'A2', 'B2', 'C2', 'D2', 'A3', 'B3')
 
