@@ -27,6 +27,7 @@ p200 = instruments.Pipette(
 )
 
 total_volume = 25
+
 DNA_volumes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
 num_pcr_samples = len(DNA_volumes)
 DNA_sources = dna_tubes.wells('A1', 'B1', 'C1', 'A2', 'B2', 'C2', 'A3', 'B3', 'C3', 'A4')
@@ -56,11 +57,11 @@ p200.pick_up_tip()
 p200.mix(5, 100, mix_location)
 p200.drop_tip()
 
-
 #Distribute Master Mix
 p20.distribute(
     sources_total_vol,
     mix_location,
+
     output.wells('A1', length=num_pcr_samples),
     blow_out=True,
     touch_tip=True,
@@ -79,7 +80,6 @@ p20.transfer(
 )
 
 #Add water
-
 water_volumes = []
 for v in DNA_volumes:
     water_volumes.append(total_volume - v - sources_total_vol)
