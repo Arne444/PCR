@@ -85,6 +85,7 @@ p20.distribute(
     water_volumes,
     water_source,
     output.wells('A1', length=num_pcr_samples),
+    mix_after=(4, 23),
     blow_out=True,
     touch_tip=True,
     new_tip='always')
