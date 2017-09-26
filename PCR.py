@@ -2,14 +2,36 @@
 
 from opentrons import robot, containers, instruments
 
-source_tubes = containers.load('tube-rack-2ml', 'D2', 'tube rack')
-dna_tubes = containers.load('tube-rack-2ml', 'C3', 'dna rack')
+#Define containers
+source_tubes = containers.load('tube-rack-2ml', 'E3', 'tube_rack')
 output = containers.load('96-PCR-flat', 'C1', 'output')
 
-p20rack = containers.load('tiprack-10ul-H', 'B2', 'p20-rack')
-p200rack = containers.load('tiprack-200ul', 'A1', 'p200-rack')
+p200rack = containers.load('tiprack-200ul', 'A1', 'p200_rack')
 trash = containers.load('trash-box', 'A3')
 
+#Create 6x12 p20 tip rack container
+containers.create(
+	'tiprack-200ul-6x12',
+	grid=(6,12),
+	spacing=(9, 9),
+	diameter=5,
+	depth=60
+)
+
+p20rack = containers.load('tiprack-200ul-6x12', 'B2', 'p20_rack')
+
+#Create 3x6 2ml tube rack for DNA samples
+containers.create(
+	'3x6-tube-rack-2ml',
+	grid=(3,6),
+	spacing=(19.5,19.5),
+	diameter=9.5,
+	depth=40
+)
+
+DNA_rack = containers.load('3x6-tube-rack-2ml', 'C3', 'DNA_rack')
+
+#Define pipettes
 p20 = instruments.Pipette(
     trash_container=trash,
     tip_racks=[p20rack],
@@ -26,12 +48,14 @@ p200 = instruments.Pipette(
     axis="b"
 )
 
+#Define DNA volumes to be added
 total_volume = 25
 
 DNA_volumes = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
 num_pcr_samples = len(DNA_volumes)
-DNA_sources = dna_tubes.wells('A1', 'B1', 'C1', 'A2', 'B2', 'C2', 'A3', 'B3', 'C3', 'A4')
+DNA_sources = dna_tubes.wells('A1', length=num_pcr_samples)
 
+#Define locations of master mix components
 mix_location = source_tubes.wells('B1')
 water_source = source_tubes.wells('C1')
 
